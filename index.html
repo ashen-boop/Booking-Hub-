@@ -912,19 +912,21 @@
 
   <div class="services-scroll-wrapper">
     <div class="services-scroll">
-      <div class="service-card" id="revenueHubCard" role="button" tabindex="0" aria-label="Revenue Hub">
+      <!-- REVENUE HUB — now a normal external link -->
+      <a class="service-card" href="https://revenue-hub.vercel.app/" target="_blank" rel="noopener">
         <h3>📈 Revenue Hub</h3>
         <p>Everything about revenue generation.</p>
         <span class="card-note">A complete revenue engine — track, forecast, and grow every income stream in one place.</span>
         <span class="card-link">Visit Site →</span>
-      </div>
+      </a>
 
-      <a class="service-card" href="https://booking-hub-3.vercel.app/" target="_blank" rel="noopener">
+      <!-- BOOKING HUB — now the popup card -->
+      <div class="service-card" id="bookingHubCard" role="button" tabindex="0" aria-label="Booking Hub">
         <h3>📅 Booking Hub</h3>
         <p>Online booking system.</p>
         <span class="card-note">Let clients book, reschedule, and pay online — automatically synced to your calendar and backend.</span>
         <span class="card-link">You're already here!</span>
-      </a>
+      </div>
 
       <a class="service-card" href="https://backend-hub-3.vercel.app/" target="_blank" rel="noopener">
         <h3>⚙️ Backend Services</h3>
@@ -969,8 +971,8 @@
   <p style="margin-top: 0.3rem; letter-spacing: 1px; font-size: 0.75rem;">Built with purpose · Designed for growth</p>
 </div>
 
-<!-- TOAST -->
-<div class="toast" id="revenueToast" role="status" aria-live="polite">
+<!-- TOAST (Booking Hub) -->
+<div class="toast" id="bookingToast" role="status" aria-live="polite">
   <span>✨</span><span>You're already in the Booking Hub</span>
 </div>
 
@@ -1038,7 +1040,7 @@
         </div>
         <div class="card-bottom">
           <h2 class="card-title">Idea + Place+ Promotion</h2>
-          <p class="card-desc"><strong>That's it.</strong> All three, working together — no gaps, no silos. And that is <strong>Revenue Hub</strong>.</p>
+          <p class="card-desc"><strong>That's it.</strong> All three, working together — no gaps, no silos. And that is <strong>Booking Hub</strong>.</p>
         </div>
       </div>
 
@@ -1384,17 +1386,26 @@
      LEGAL + TOAST
      ============================================ */
   (function() {
-    const revenueHubCard = document.getElementById('revenueHubCard');
-    const revenueToast = document.getElementById('revenueToast');
-    let toastTimer = null;
-    function showRevenueToast() {
-      revenueToast.classList.add('show');
-      if (toastTimer) clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => revenueToast.classList.remove('show'), 2200);
-    }
-    revenueHubCard.addEventListener('click', showRevenueToast);
-    revenueHubCard.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showRevenueToast(); } });
+    /* --- Booking Hub toast --- */
+    const bookingHubCard = document.getElementById('bookingHubCard');
+    const bookingToast   = document.getElementById('bookingToast');
+    let bookingToastTimer = null;
 
+    function showBookingToast() {
+      bookingToast.classList.add('show');
+      if (bookingToastTimer) clearTimeout(bookingToastTimer);
+      bookingToastTimer = setTimeout(() => bookingToast.classList.remove('show'), 2200);
+    }
+
+    bookingHubCard.addEventListener('click', showBookingToast);
+    bookingHubCard.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        showBookingToast();
+      }
+    });
+
+    /* --- Legal popup --- */
     const legalBtn = document.getElementById('legalBtn');
     const legalOverlay = document.getElementById('legalOverlay');
     const legalCloseBtn = document.getElementById('legalCloseBtn');
